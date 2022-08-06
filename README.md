@@ -1,0 +1,2 @@
+# dnstrike
+Weaponized DNS Resolver
