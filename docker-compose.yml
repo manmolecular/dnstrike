@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  resolver:
+    container_name: dnstrike
+    image: dnstrike:0.1.0
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    healthcheck:
+      test: dig +time=3 +tries=1 @localhost -p 55053 1-1-1-1.bind.localhost
+      interval: 10s
+      timeout: 3s
+      retries: 3
+    ports:
+      - "53:55053/udp"
